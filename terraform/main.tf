@@ -48,3 +48,27 @@ resource "render_postgres" "db" {
   version       = "15" 
   database_name = "flask_db"
 }
+
+# Déploiement de l'interface Adminer
+resource "render_web_service" "adminer" {
+  name   = "adminer-${var.github_actor}"
+  plan   = "free"
+  region = "frankfurt"
+  
+  runtime_source = {
+    image = {
+      image_url = "adminer:latest" # Image Docker officielle et publique d'Adminer
+    }
+  }
+
+  env_vars = {
+    # On pré-remplit le système de base de données pour se faciliter la vie
+    ADMINER_DEFAULT_SERVER = {
+      value = render_postgres.db.connection_info.internal_connection_string
+    }
+    # On précise qu'on veut se connecter à PostgreSQL par défaut
+    ADMINER_DESIGN = {
+      value = "pepa-linha-dark" # (Optionnel) Un petit thème sympa
+    }
+  }
+}
