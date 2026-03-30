@@ -38,6 +38,7 @@ resource "render_web_service" "flask_app" {
       value = render_postgres.db.connection_info.internal_connection_string
     }
   }
+}
 
 # Création de la base de données PostgreSQL
 resource "render_postgres" "db" {
