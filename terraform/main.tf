@@ -33,8 +33,11 @@ resource "render_web_service" "flask_app" {
     ENV = {
       value = "production"
     }
+    # On ajoute l'URL de la base de données générée par Render
+    DATABASE_URL = {
+      value = render_postgres.db.connection_info.internal_connection_string
+    }
   }
-}
 
 # Création de la base de données PostgreSQL
 resource "render_postgres" "db" {
