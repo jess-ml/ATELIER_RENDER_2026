@@ -57,7 +57,8 @@ resource "render_web_service" "adminer" {
   
   runtime_source = {
     image = {
-      image_url = "adminer:latest" # Image Docker officielle et publique d'Adminer
+      image_url = "adminer"   # On retire le :latest d'ici
+      tag       = "latest"    # Et on le met dans son propre attribut
     }
   }
 
