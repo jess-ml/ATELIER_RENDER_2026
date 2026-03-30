@@ -38,11 +38,9 @@ resource "render_web_service" "flask_app" {
 
 # Création de la base de données PostgreSQL
 resource "render_postgres" "db" {
-  name    = "my-database-${var.github_actor}"
-  plan    = "free"
-  region  = "frankfurt"
-  version = "15" # Version standard recommandée
-
+  name          = "my-database-${var.github_actor}"
+  plan          = "free"
+  region        = "frankfurt"
+  version       = "15" 
   database_name = "flask_db"
-  user          = "flask_user"
 }
